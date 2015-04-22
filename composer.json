@@ -1,0 +1,32 @@
+{
+    "name": "codeacious/oauth2-provider",
+    "description": "A simple and clean Zend Framework 2 wrapper for the oauth2-server-php library",
+    "type": "library",
+    "require": {
+        "php": ">=5.4",
+        "bshaffer/oauth2-server-php": "~1.0",
+        "zendframework/zend-http": "~2.0",
+        "zendframework/zend-servicemanager": "~2.0",
+        "zendframework/zend-filter": "~2.0"
+    },
+    "require-dev": {
+        "phpunit/PHPUnit": "3.7.*"
+    },
+    "suggest": {
+        "zfcampus/zf-mvc-auth": "Use with the included adapter to authenticate requests using access tokens"
+    },
+    "autoload": {
+        "psr-4": {
+            "Codeacious\\OAuth2Provider\\": "src/",
+            "CodeaciousTest\\OAuth2Provider\\": "test/"
+        },
+        "classmap": [
+            "./Module.php"
+        ]
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-trunk": "1.0.x-dev"
+        }
+    }
+}
