@@ -13,6 +13,8 @@ use OAuth2\Response as OAuthResponse;
 use Zend\Http\PhpEnvironment\Request as HttpRequest;
 use Zend\Http\Response as HttpResponse;
 
+use Codeacious\OAuth2Provider\Authentication\AccessTokenIdentity;
+
 /**
  * ZF2 wrapper for OAuth2\Server
  */
@@ -145,6 +147,20 @@ class Provider
     {
         return $this->getOAuthServer()->getAccessTokenData($this->getOAuthRequest(),
             $this->getOAuthResponse());
+    }
+
+    /**
+     * Retrieve information about the user making the current request (if they supplied a valid
+     * access token).
+     *
+     * @return AccessTokenIdentity|null
+     */
+    public function getIdentity()
+    {
+        if (!($data = $this->getAccessTokenData()))
+            return null;
+
+        return new AccessTokenIdentity($data);
     }
 
     /**
