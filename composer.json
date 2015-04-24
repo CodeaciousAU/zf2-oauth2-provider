@@ -2,6 +2,14 @@
     "name": "codeacious/oauth2-provider",
     "description": "A simple and clean Zend Framework 2 wrapper for the oauth2-server-php library",
     "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Glenn Schmidt",
+            "email": "glenn@codeacious.com",
+            "homepage": "https://codeacious.com"
+        }
+    ],
     "require": {
         "php": ">=5.4",
         "bshaffer/oauth2-server-php": "~1.0",
