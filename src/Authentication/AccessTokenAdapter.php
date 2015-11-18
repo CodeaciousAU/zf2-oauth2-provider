@@ -10,6 +10,7 @@ use Codeacious\OAuth2Provider\Provider;
 
 use Zend\Authentication\Adapter\AdapterInterface;
 use Zend\Authentication\Result as AuthResult;
+use Zend\Authentication\Adapter\Exception\RuntimeException;
 use Zend\Http\Request as HttpRequest;
 use Zend\Http\Response as HttpResponse;
 
@@ -37,9 +38,27 @@ class AccessTokenAdapter implements AdapterInterface
     /**
      * @param Provider $provider
      */
-    public function __construct(Provider $provider)
+    public function __construct(Provider $provider=null)
     {
         $this->provider = $provider;
+    }
+
+    /**
+     * @return Provider
+     */
+    public function getProvider()
+    {
+        return $this->provider;
+    }
+
+    /**
+     * @param Provider $provider
+     * @return AccessTokenAdapter
+     */
+    public function setProvider($provider)
+    {
+        $this->provider = $provider;
+        return $this;
     }
 
     /**
@@ -87,6 +106,12 @@ class AccessTokenAdapter implements AdapterInterface
      */
     public function authenticate()
     {
+        if (!$this->provider)
+        {
+            throw new RuntimeException('This adapter must be configured with an OAuth provider '
+                .'before authentication can occur');
+        }
+
         if (!($tokenData = $this->provider->getAccessTokenData()))
             return $this->_failureResult();
 
@@ -103,9 +128,12 @@ class AccessTokenAdapter implements AdapterInterface
     {
         $oAuthResponse = $this->provider->getOAuthResponse();
 
-        $this->getResponse()
-            ->setStatusCode($oAuthResponse->getStatusCode())
-            ->getHeaders()->addHeaders($oAuthResponse->getHttpHeaders());
+        if ($this->response)
+        {
+            $this->response
+                 ->setStatusCode($oAuthResponse->getStatusCode())
+                 ->getHeaders()->addHeaders($oAuthResponse->getHttpHeaders());
+        }
 
         if ($oAuthResponse->getParameter('error'))
         {
