@@ -121,6 +121,16 @@ class Provider
     /**
      * @return Provider
      */
+    public function handleRevokeRequest()
+    {
+        $this->getOAuthServer()->handleRevokeRequest($this->getOAuthRequest(),
+            $this->getOAuthResponse());
+        return $this;
+    }
+
+    /**
+     * @return Provider
+     */
     public function handleUserInfoRequest()
     {
         $this->getOAuthServer()->handleUserInfoRequest($this->getOAuthRequest(),
