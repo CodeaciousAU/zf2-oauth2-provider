@@ -9,11 +9,10 @@ namespace Codeacious\OAuth2Provider\Config;
 use Codeacious\OAuth2Provider\Exception\ConfigurationException;
 
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\Filter\Word\UnderscoreToCamelCase;
 use Zend\Filter\Word\CamelCaseToUnderscore;
 
-abstract class Factory implements ServiceLocatorAwareInterface
+abstract class Factory
 {
     /**
      * @var ServiceLocatorInterface
