@@ -56,7 +56,7 @@ For example, put this in your `config/autoload/global.php` or `module/Applicatio
         ],
     ],
     
-    'oauth2provider' => [
+    'oauth2providers' => [
         'MyMainProvider' => [
             //Configure the first provider here
         ],
