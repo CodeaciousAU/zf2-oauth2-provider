@@ -20,8 +20,11 @@ class StorageFactory extends Factory
     public function create($config, $name=null)
     {
         //See if the config value is a class name
-        if (is_string($config) && class_exists($config))
+        if (is_string($config) && (!$this->services || !$this->services->has($config))
+            && class_exists($config))
+        {
             $config = array('class' => $config);
+        }
 
         //See if it's a service name, a preconfigured object or a closure
         if (($obj = $this->resolveReference($config)))
